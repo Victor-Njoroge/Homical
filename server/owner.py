@@ -6,6 +6,7 @@ class Owner(db.Model):
     __tablename__ = "owner"
 
     id=db.Column(db.Integer, primary_key=True)
+    profilePic=db.Column(db.String, nullable=False)
     fname=db.Column(db.String, nullable=False)
     lname=db.Column(db.String, nullable=False)
     phoneNo=db.Column(db.String, nullable=False)

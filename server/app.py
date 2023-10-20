@@ -30,6 +30,32 @@ def post_customer():
             return jsonify({'message':'Customer account created successfully'}), 201
         else:
             return jsonify({'error':'Missing fields in the request data'}), 400
+        
+
+@app.route('/create_owner', methods=["POST"])
+def post_owner():
+    if request.method == "POST":
+        data = request.json
+        
+        if 'fname' in data and 'lname' in data and 'profilePic' in data and 'phoneNo' in data and 'email' in data and 'password' in data:
+            new_owner=Owner(
+                fname=str(data['fname']),
+                lname=str(data['lname']),
+                profilePic=str(data['profilePic']),
+                phoneNo=str(data['phoneNo']),
+                email=str(data['email']),
+                password=str(data['password'])
+            )
+
+            db.session.add(new_owner)
+            db.session.commit()
+
+            return jsonify({"message":"Owner created successfully"}), 201
+        
+        else:
+            return jsonify({"error":"Missing fields in the request data"}), 400
+        
+
 
 if __name__ == '__main__':
     with app.app_context():

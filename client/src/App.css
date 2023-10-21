@@ -123,3 +123,41 @@ body{
     margin: 1rem;
     border-radius: 30px;
 }
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20rem;
+    background: rgb(1, 18, 48);
+    justify-content: space-around;
+    align-items: center;
+    width: 10rem;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.sidebar .icons{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sidebar .icons i{
+    font-size: 3rem;
+    margin: 1rem;
+    color: #fff;
+    padding-top: 2rem;
+}
+
+.sidebar .icons2{
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.sidebar .icons2 i{
+    font-size: 3rem;
+    margin: 1rem;
+    color: #fff;
+    padding-top: 2rem;
+}

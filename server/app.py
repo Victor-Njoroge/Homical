@@ -4,6 +4,7 @@ from owner import Owner, db
 from bnb import Bnb
 from bookings import Bookings
 from customer import Customer
+from picture import Picture
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///mydatabase.db'
@@ -54,9 +55,41 @@ def post_owner():
         
         else:
             return jsonify({"error":"Missing fields in the request data"}), 400
-        
 
 
+@app.route('/create_bnb', methods=["POST"])
+def post_bnb():
+    if request.method == "POST":
+        data = request.json
+
+        if 'ownerId' in data and 'name' in data and 'location' in data and 'model' in data and 'description' in data and 'address' in data and 'price' in data:
+            new_bnb = Bnb(
+                ownerId=data['ownerId'],
+                name=data['name'],
+                location=data['location'],
+                description=data['description'],
+                address=data['address'],
+                price=data['price'],
+                model=data['model']
+            )
+
+            db.session.add(new_bnb)
+            db.session.commit()
+
+            # Handle image URLs
+            image_urls = data.get('imageUrls')
+
+            if image_urls:
+                for image_url in image_urls:
+                    picture = Picture(url=image_url, bnbId=new_bnb.id)
+                    db.session.add(picture)
+
+                db.session.commit()
+
+            return jsonify({"message": "BnB and image URLs created successfully"}), 201
+
+        else:
+            return jsonify({"error": "Missing fields in the request data"}), 400
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

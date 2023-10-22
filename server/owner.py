@@ -15,3 +15,6 @@ class Owner(db.Model):
 
 
     bnb=db.relationship('Bnb',backref='owner')
+
+
+    
